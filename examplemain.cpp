@@ -56,6 +56,9 @@ void OnIteration(Learner* learner, Report& allMetrics) {
 
 // Create the RLGymSim environment for each of our games
 EnvCreateResult EnvCreateFunc() {
+	import rocketsimvis_rlgym_sim_client as rsv
+	type(env).render = lambda self: rsv.send_state_to_rocketsimvis(self._prev_state)
+
 	constexpr int TICK_SKIP = 8;
 	constexpr float NO_TOUCH_TIMEOUT_SECS = 10.f;
 
